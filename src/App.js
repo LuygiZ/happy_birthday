@@ -1,10 +1,6 @@
-import Card from "./Card";
+import BirthdayAnimation from "./BirthdayAnimation";
 import "./styles.css";
 
 export default function App() {
-  return (
-    <div className="App">
-      <Card />
-    </div>
-  );
+  return <BirthdayAnimation />;
 }
