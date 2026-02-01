@@ -129,7 +129,7 @@ const BirthdayAnimation = () => {
       })
       .from(".wish-text", { duration: 0.4, opacity: 0, y: 10 })
 
-      // 6. CONFETTI
+      // 6. CONFETTI BURST
       .to(".confetti-circle", {
         duration: 0.8,
         visibility: "visible",
@@ -140,8 +140,18 @@ const BirthdayAnimation = () => {
         repeatDelay: 0.8,
       })
 
-      // 7. OUTRO
-      .to(".profile-section", { duration: 0.5, opacity: 0 }, "+=0.5")
+      // 7. CONFETTI RAIN (paper + emojis)
+      .to(".confetti-rain", {
+        duration: 0.1,
+        opacity: 1,
+        onStart: () => {
+          document.querySelector(".confetti-rain")?.classList.add("active");
+        }
+      }, "-=3")
+
+      // 8. OUTRO
+      .to(".confetti-rain", { duration: 0.5, opacity: 0 })
+      .to(".profile-section", { duration: 0.5, opacity: 0 }, "-=0.3")
       .to(".outro-section", { duration: 0.1, opacity: 1 })
       .from(".outro-text", { duration: 0.5, opacity: 0, y: 20 })
       .from(".replay-btn", { duration: 0.5, opacity: 0, y: 20 }, "-=0.3")

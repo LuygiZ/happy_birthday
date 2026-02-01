@@ -1,9 +1,36 @@
+import { useState } from "react";
 import { config } from "../config";
 
 const IntroCard = ({ onStart }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleCardClick = () => {
+    if (!isOpen) {
+      // First click/tap opens the card
+      setIsOpen(true);
+    } else {
+      // Second click/tap starts the animation
+      onStart();
+    }
+  };
+
+  // For desktop: hover opens, click starts
+  const handleMouseEnter = () => {
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="intro-wrapper">
-      <div className="intro-card" onClick={onStart}>
+      <div
+        className={`intro-card ${isOpen ? "card-open" : ""}`}
+        onClick={handleCardClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <div className="card-front">
           <div className="card-decoration">
             <div className="balloon balloon-1"></div>
@@ -15,7 +42,9 @@ const IntroCard = ({ onStart }) => {
             <span className="card-emoji">🎂</span>
             <h2 className="card-title">Happy Birthday</h2>
             <h3 className="card-name">{config.name}!</h3>
-            <p className="card-hint">Click to open</p>
+            <p className="card-hint">
+              {isOpen ? "Tap again to start!" : "Tap to open"}
+            </p>
           </div>
           <div className="card-sparkles">
             <span>✨</span>
@@ -30,7 +59,9 @@ const IntroCard = ({ onStart }) => {
           </div>
         </div>
       </div>
-      <p className="intro-instruction">Hover & Click the card</p>
+      <p className="intro-instruction">
+        {isOpen ? "Tap to start!" : "Tap or hover the card"}
+      </p>
     </div>
   );
 };
